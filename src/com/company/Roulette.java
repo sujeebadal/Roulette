@@ -7,60 +7,64 @@ public class Roulette {
 
     public static void main(String[] args) {
         Scanner Keyboard = new Scanner(System.in);
-        for (int i = 0; i < 100; i++) {
+
+        int amount_money = 0;
+        String quit= "";
+        //int counter;
+        do {
             System.out.println("Type of bet (red|black|even|odd|high|low)");
             String bet_type = Keyboard.nextLine();
 
             System.out.println("Enter amount of bet money");
-            int amount_money = Keyboard.nextInt();
-            int d_money = amount_money * 2;
+            amount_money = Keyboard.nextInt();
 
             Random r = new Random();
             int x = 1 + r.nextInt(36);
-            String y = bet_type + r.nextLong();
-            System.out.println("The ball landed on " + x + " "+ y);
 
-            if (bet_type.equals("red") && x <= 36) {
-                System.out.println("Congratulations you have won. ");
-                System.out.println("You currently have " + "$" + d_money);
-            } else if (bet_type.equals("black") && x <= 36) {
-                System.out.println("Congratulations you have won. ");
-                System.out.println("You currently have " + "$" + d_money);
-            } else if (bet_type.equals("low") && x >= 1 && x <= 18) {
-                System.out.println("Congratulations you have won. ");
-                System.out.println("You currently have " + "$" + d_money);
-            } else if (bet_type.equals("high") && x >= 19 && x <= 36) {
-                System.out.println("Sorry you have lost");
+            System.out.println("The ball landed on " + x);
+
+            if (x % 2 == 0 && bet_type.equalsIgnoreCase("even")) {
+                amount_money = amount_money * 2;
+                System.out.println("Congratulations you have won.");
+                System.out.println("You currently have " + "$" + amount_money);
+            } else if (x % 2 != 0 && bet_type.equalsIgnoreCase("odd")) {
+                amount_money = amount_money * 2;
+                System.out.println("Congratulations you have won.");
+                System.out.println("You currently have " + "$" + amount_money);
+
+            } else if (x >= 1 && x <= 18 && bet_type.equalsIgnoreCase("low")) {
+                amount_money = amount_money * 2;
+                System.out.println("Congratulations you have won.");
+                System.out.println("You currently have " + "$" + amount_money);
+
+            } else if (x >= 19 && x <= 36 && bet_type.equalsIgnoreCase("high")) {
+                amount_money = amount_money * 2;
+                System.out.println("Congratulations you have won.");
+                System.out.println("You currently have " + "$" + amount_money);
+
+            } else {
+                System.out.println("Sorry you have lost this bet.");
+                amount_money = amount_money - amount_money;
                 System.out.println("You currently have " + "$" + amount_money);
             }
-            if (bet_type.equals("red") && x > 36) {
-                System.out.println("Sorry you have lost");
-                System.out.println("You currently have " + "$" + amount_money);
-            } else if (bet_type.equals("black") && x > 36) {
-                System.out.println("Sorry you have lost");
-                System.out.println("You currently have " + "$" + amount_money);
-            } else if (bet_type.equals("low") && x > 18) {
-                System.out.println("Sorry you have lost");
-                System.out.println("You currently have " + "$" + amount_money);
-            } else if (bet_type.equals("high") && x > 36) {
-                System.out.println("Sorry you have lost");
-                System.out.println("You currently have " + "$" + amount_money);
-            }
 
-            System.out.print("Would you like to play again? (true/false)");
-            String play_again = Keyboard.nextLine();
+            System.out.print("Would you like to play again (true|false)?");
+            quit = Keyboard.next();
+            Keyboard.nextLine();
+        } while (quit.equalsIgnoreCase("true"));
 
-            if (play_again.equals("true")) {
-                System.out.println("Enter ");
 
-            } else if (play_again.equals("false")) {
-                System.out.println("Thank you for playing.");
-                System.exit(0);
+        if (quit.equalsIgnoreCase("false"))
+           System.out.println("Thank you for playing.");
 
-            }
-        }
+        //counter ++;
+
+           System.out.println("This is how much money you have remaining: " + "$" + amount_money);
+
+
     }
-}
+    }
+
 
 
 
